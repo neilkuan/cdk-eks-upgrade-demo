@@ -19,11 +19,11 @@ export class CdkEksUpgradeStack extends cdk.Stack {
     /**
      * 1.23 default container runtime is dockerd
      */
-    cluster.addNodegroupCapacity('1-23MNG',{
-      minSize: 1,
-      maxSize: 2,
-      instanceTypes: [new ec2.InstanceType('t3.medium')],
-    });
+    // cluster.addNodegroupCapacity('1-23MNG',{
+    //   minSize: 1,
+    //   maxSize: 2,
+    //   instanceTypes: [new ec2.InstanceType('t3.medium')],
+    // });
 
     /**
      * 使用 Custom UserDate enabled containerd as container runtime interface.
