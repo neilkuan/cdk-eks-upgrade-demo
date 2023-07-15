@@ -10,8 +10,8 @@ export class CdkEksUpgradeStack extends cdk.Stack {
     super(scope, id, props);
 
     const cluster = new eks.Cluster(this, 'Cluster', {
-      // version: eks.KubernetesVersion.V1_23,
-      version: eks.KubernetesVersion.V1_24,
+      version: eks.KubernetesVersion.V1_23,
+      // version: eks.KubernetesVersion.V1_24,
       kubectlLayer: new KubectlV23Layer(this, 'KubectlV23Layer'),
       defaultCapacity: 0,
     });
@@ -19,11 +19,11 @@ export class CdkEksUpgradeStack extends cdk.Stack {
     /**
      * 1.23 default container runtime is dockerd
      */
-    // cluster.addNodegroupCapacity('1-23MNG',{
-    //   minSize: 1,
-    //   maxSize: 2,
-    //   instanceTypes: [new ec2.InstanceType('t3.medium')],
-    // });
+    cluster.addNodegroupCapacity('1-23MNG',{
+      minSize: 1,
+      maxSize: 2,
+      instanceTypes: [new ec2.InstanceType('t3.medium')],
+    });
 
     /**
      * 使用 Custom UserDate enabled containerd as container runtime interface.
@@ -80,11 +80,11 @@ export class CdkEksUpgradeStack extends cdk.Stack {
     //   }],
     // });
 
-    cluster.addNodegroupCapacity('1-24MNGContainerd', {
-      instanceTypes: [new ec2.InstanceType('t3.medium')],
-      minSize: 1,
-      maxSize: 2,
-    });
+    // cluster.addNodegroupCapacity('1-24MNGContainerd', {
+    //   instanceTypes: [new ec2.InstanceType('t3.medium')],
+    //   minSize: 1,
+    //   maxSize: 2,
+    // });
 
     /**
      * Replace to your aws iam user name.
