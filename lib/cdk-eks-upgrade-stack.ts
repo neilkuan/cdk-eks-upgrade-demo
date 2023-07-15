@@ -10,8 +10,8 @@ export class CdkEksUpgradeStack extends cdk.Stack {
     super(scope, id, props);
 
     const cluster = new eks.Cluster(this, 'Cluster', {
-      version: eks.KubernetesVersion.V1_23,
-      // version: eks.KubernetesVersion.V1_24,
+      // version: eks.KubernetesVersion.V1_23,
+      version: eks.KubernetesVersion.V1_24,
       kubectlLayer: new KubectlV23Layer(this, 'KubectlV23Layer'),
       defaultCapacity: 0,
     });
