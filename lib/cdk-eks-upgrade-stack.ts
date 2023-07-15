@@ -31,18 +31,18 @@ export class CdkEksUpgradeStack extends cdk.Stack {
      * https://github.com/awslabs/amazon-eks-ami/blob/91c6002ff1b3b11e59941aad7417dc91dcf665ef/files/bootstrap.sh#L199
      * sed -i 's/\${CONTAINER_RUNTIME:-$DEFAULT_CONTAINER_RUNTIME}/containerd/' /etc/eks/bootstrap.sh
      */
-    const userData = `MIME-Version: 1.0
-Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
+//     const userData = `MIME-Version: 1.0
+// Content-Type: multipart/mixed; boundary="==MYBOUNDARY=="
 
---==MYBOUNDARY==
-Content-Type: text/x-shellscript; charset="us-ascii"
+// --==MYBOUNDARY==
+// Content-Type: text/x-shellscript; charset="us-ascii"
 
-#!/bin/bash
-sed -i 's/\${CONTAINER_RUNTIME:-$DEFAULT_CONTAINER_RUNTIME}/containerd/' /etc/eks/bootstrap.sh
---==MYBOUNDARY==--\\
-`;
-    const lt = new ec2.CfnLaunchTemplate(this, 'LaunchTemplate', {
-      launchTemplateData: { userData: cdk.Fn.base64(userData) } } );
+// #!/bin/bash
+// sed -i 's/\${CONTAINER_RUNTIME:-$DEFAULT_CONTAINER_RUNTIME}/containerd/' /etc/eks/bootstrap.sh
+// --==MYBOUNDARY==--\\
+// `;
+//     const lt = new ec2.CfnLaunchTemplate(this, 'LaunchTemplate', {
+//       launchTemplateData: { userData: cdk.Fn.base64(userData) } } );
 
     // cluster.addNodegroupCapacity('1-23MNGContainerd', {
     //   instanceTypes: [new ec2.InstanceType('t3.medium')],
@@ -59,15 +59,15 @@ sed -i 's/\${CONTAINER_RUNTIME:-$DEFAULT_CONTAINER_RUNTIME}/containerd/' /etc/ek
     //   }],
     // });
 
-    cluster.addNodegroupCapacity('1-23MNGContainerd', {
-      instanceTypes: [new ec2.InstanceType('t3.medium')],
-      minSize: 1,
-      maxSize: 2,
-      launchTemplateSpec: {
-        id: lt.ref,
-        version: lt.attrLatestVersionNumber,
-      },
-    });
+    // cluster.addNodegroupCapacity('1-23MNGContainerd', {
+    //   instanceTypes: [new ec2.InstanceType('t3.medium')],
+    //   minSize: 1,
+    //   maxSize: 2,
+    //   launchTemplateSpec: {
+    //     id: lt.ref,
+    //     version: lt.attrLatestVersionNumber,
+    //   },
+    // });
 
     // cluster.addNodegroupCapacity('1-24MNGContainerd', {
     //   instanceTypes: [new ec2.InstanceType('t3.medium')],
