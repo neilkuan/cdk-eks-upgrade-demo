@@ -44,21 +44,6 @@ sed -i 's/\${CONTAINER_RUNTIME:-$DEFAULT_CONTAINER_RUNTIME}/containerd/' /etc/ek
     const lt = new ec2.CfnLaunchTemplate(this, 'LaunchTemplate', {
       launchTemplateData: { userData: cdk.Fn.base64(userData) } } );
 
-    cluster.addNodegroupCapacity('1-23MNGContainerd', {
-      instanceTypes: [new ec2.InstanceType('t3.medium')],
-      minSize: 1,
-      maxSize: 2,
-      launchTemplateSpec: {
-        id: lt.ref,
-        version: lt.attrLatestVersionNumber,
-      },
-      taints: [{
-        effect: eks.TaintEffect.NO_SCHEDULE,
-        value: 'true',
-        key: 'taints',
-      }],
-    });
-
     // cluster.addNodegroupCapacity('1-23MNGContainerd', {
     //   instanceTypes: [new ec2.InstanceType('t3.medium')],
     //   minSize: 1,
@@ -67,7 +52,22 @@ sed -i 's/\${CONTAINER_RUNTIME:-$DEFAULT_CONTAINER_RUNTIME}/containerd/' /etc/ek
     //     id: lt.ref,
     //     version: lt.attrLatestVersionNumber,
     //   },
+    //   taints: [{
+    //     effect: eks.TaintEffect.NO_SCHEDULE,
+    //     value: 'true',
+    //     key: 'taints',
+    //   }],
     // });
+
+    cluster.addNodegroupCapacity('1-23MNGContainerd', {
+      instanceTypes: [new ec2.InstanceType('t3.medium')],
+      minSize: 1,
+      maxSize: 2,
+      launchTemplateSpec: {
+        id: lt.ref,
+        version: lt.attrLatestVersionNumber,
+      },
+    });
 
     // cluster.addNodegroupCapacity('1-24MNGContainerd', {
     //   instanceTypes: [new ec2.InstanceType('t3.medium')],
