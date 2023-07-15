@@ -80,11 +80,11 @@ sed -i 's/\${CONTAINER_RUNTIME:-$DEFAULT_CONTAINER_RUNTIME}/containerd/' /etc/ek
     //   }],
     // });
 
-    // cluster.addNodegroupCapacity('1-24MNGContainerd', {
-    //   instanceTypes: [new ec2.InstanceType('t3.medium')],
-    //   minSize: 1,
-    //   maxSize: 2,
-    // });
+    cluster.addNodegroupCapacity('1-24MNGContainerd', {
+      instanceTypes: [new ec2.InstanceType('t3.medium')],
+      minSize: 1,
+      maxSize: 2,
+    });
 
     /**
      * Replace to your aws iam user name.
